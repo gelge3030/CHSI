@@ -1,0 +1,88 @@
+<?php
+session_start(); // Start the session to check for a success message
+
+// Check if a success message is set in the session
+// If not, redirect them back to the registration page to prevent direct access
+if (!isset($_SESSION['registration_success']) || $_SESSION['registration_success'] !== true) {
+    header('Location: register.html'); // Or register.php if that's your main reg page
+    exit();
+}
+
+// Clear the success message from the session after displaying it
+unset($_SESSION['registration_success']);
+
+?> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css"> <!-- Reusing some styles for consistency -->
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center vertically */
+            padding: 2rem;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .success-container {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        .success-message {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #22c55e; /* Green color for success */
+            margin-bottom: 1rem;
+        }
+        .login-link {
+            display: inline-block;
+            background-color: #3b82f6; /* Blue for login button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+            margin-top: 1.5rem;
+        }
+        .login-link:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+        }
+
+        /* Keyframe for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <p class="success-message">You are registered!</p>
+        <p>Your account has been successfully created.</p>
+        <a href="login.html" class="login-link">Proceed to Login</a>
+    </div>
+</body>
+</html>
